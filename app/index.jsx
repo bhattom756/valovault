@@ -26,7 +26,7 @@ export default function App() {
             <Image source={homelogo} className="w-[250px] h-[300px]" resizeMode="cover" />
           </View>
           <View className="relative mt-8">
-            <Text className="text-5xl text-white font-pextrabold text-center">
+            <Text className="text-5xl text-white font-extrabold text-center">
               Valo
               <Text className="text-[#000]">Vault</Text>
             </Text>
@@ -34,10 +34,10 @@ export default function App() {
 
           <Text className="text-xl font-pregular text-gray-100 mt-7 text-center">
             Keep an Eye on your
-            <Text className="font-pextrabold"> Act Rank</Text>,
-            <Text className="font-pextrabold"> Gameplay Stats</Text>,
-            <Text className="font-pextrabold"> ValoNews </Text>, and an ultimate guide for
-            <Text className="font-pextrabold"> Agent lineups</Text>.
+            <Text className="font-extrabold"> Act Rank</Text>,
+            <Text className="font-extrabold"> Gameplay Stats</Text>,
+            <Text className="font-extrabold"> ValoNews </Text>, and an ultimate guide for
+            <Text className="font-extrabold"> Agent lineups</Text>.
           </Text>
           <Pressable
             onPress={handleSignIn}
@@ -48,7 +48,7 @@ export default function App() {
             ]}>
             {({ pressed }) => (
               <Text
-                className={`text-[20px] font-pextrabold transition-all duration-150 ${
+                className={`text-[20px] font-extrabold transition-all duration-150 ${
                   pressed ? 'text-white' : 'text-[#ff5561]'
                 }`}>
                 Sign In with Riot ID
@@ -65,7 +65,7 @@ export default function App() {
             onPress={handlePress} // Ensure onPress is here
           >
             {({ pressed }) => (
-              <Text className={`text-[16px] font-pmedium ${pressed ? 'text-black' : 'text-white'}`}>
+              <Text className={`text-[16px] font-medium ${pressed ? 'text-black' : 'text-white'}`}>
                 Continue as a Guest!
               </Text>
             )}
