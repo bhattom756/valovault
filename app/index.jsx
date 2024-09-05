@@ -7,10 +7,7 @@ import Modal from '../components/Modal';
 
 export default function App() {
   const homelogo = require('../assets/images/homepage.png');
-  // const mute = require('../assets/images/mute.png');
-  // const unmute = require('../assets/images/unmute.png');
-  // const privacy = require('../assets/images/pp.png');
-
+  
   const handleSignIn = () => {
     router.replace('/signin');
   };
