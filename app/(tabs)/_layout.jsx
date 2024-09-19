@@ -58,9 +58,9 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="create"
+        name="chat"
         options={{
-          title: "Create",
+          title: "Global Chat",
           headerShown: false,
         //   tabBarIcon: ({ color, focused }) => (
         //     <TabIcon
