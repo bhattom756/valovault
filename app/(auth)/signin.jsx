@@ -13,11 +13,11 @@ const SignIn = () => {
   const handleLogin = () => {
     if (email !== "" && password !== "") {
       signInWithEmailAndPassword(auth, email, password)
-        .then(() => console.log("Login success"))
-        .catch((err) => Alert.alert("Login error", err.message));
+      .then(() => console.log("Login success"))
+      .catch((err) => Alert.alert("Login error", err.message));
+        router.replace('/home')
     }
   };
-
   const handlePress = () => {
     router.replace('/signup');
   };

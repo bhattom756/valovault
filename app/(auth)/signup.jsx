@@ -1,25 +1,32 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Pressable, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth"; // Use createUserWithEmailAndPassword for sign-up
 import { auth } from "../../config/firebase";
-import { Text, Input, ScrollView} from "tamagui";
+import { Text, Input, ScrollView } from "tamagui";
 import { router } from "expo-router";
 
-const signup = () => {
+const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSignUp = () => {
     if (email !== "" && password !== "") {
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => console.log("Signup success"))
+      createUserWithEmailAndPassword(auth, email, password) // Correct method for signing up
+        .then(() => {
+          // console.log("Signup success");
+          Alert.alert("Signup Success", "Your account has been created!");
+          router.replace('/signin')
+        })
         .catch((err) => Alert.alert("Sign up error", err.message));
+        console.log("error signup");
+    } else {
+      Alert.alert("Input Error", "Please enter both email and password");
     }
   };
 
-  function handleLogin(){
-    router.replace('/signin')
+  function handleLogin() {
+    router.replace("/signin");
   }
 
   return (
@@ -30,13 +37,6 @@ const signup = () => {
             Register your Account{" "}
           </Text>
           <View className="mt-10">
-            {/* <Input
-              size="$5"
-              placeholder="Enter your username"
-             
-              onChangeText={(text) => setEmail(text)}
-              className="w-[300px] mb-8 bg-white p-2 border-b-2 border-gray-300"
-            /> */}
             <Input
               size="$5"
               placeholder="Enter your email"
@@ -67,7 +67,6 @@ const signup = () => {
               },
             ]}
             onPress={handleLogin}
-          
           >
             {({ pressed }) => (
               <Text
@@ -75,7 +74,7 @@ const signup = () => {
                   pressed ? "text-black" : "text-red-300"
                 }`}
               >
-                Registered User? Log In! 
+                Registered User? Log In!
               </Text>
             )}
           </Pressable>
@@ -85,4 +84,4 @@ const signup = () => {
   );
 };
 
-export default signup
+export default Signup;

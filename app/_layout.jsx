@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { useColorScheme, ActivityIndicator } from 'react-native';
+import { useColorScheme } from 'react-native';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
-import { Provider } from './Provider';
+import { Provider } from './Provider'; // Tamagui Provider
 import * as NavigationBar from 'expo-navigation-bar';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebase'; // Firebase config
@@ -33,9 +33,11 @@ export default function RootLayout() {
   }
 
   return (
-    <AuthenticatedUserProvider>
-      <RootLayoutNav />
-    </AuthenticatedUserProvider>
+    <Provider>
+      <AuthenticatedUserProvider>
+        <RootLayoutNav />
+      </AuthenticatedUserProvider>
+    </Provider>
   );
 }
 
@@ -59,20 +61,20 @@ const AuthenticatedUserProvider = ({ children }) => {
 
 function RootLayoutNav() {
   const { user } = useContext(AuthenticatedUserContext); // Get user from context
-
   const colorScheme = useColorScheme();
+
   NavigationBar.setPositionAsync('absolute');
   NavigationBar.setBackgroundColorAsync('#ffffff01');
 
   return (
-    <Provider>
     <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
       <Stack
         screenOptions={{
           contentStyle: { backgroundColor: '#161626' },
-        }}>
-        {!user ? (
-          <>
+        }}
+      >
+        {/* {!user ? (
+          <> */}
             <Stack.Screen
               name="index"
               options={{ headerShown: false }}
@@ -81,15 +83,14 @@ function RootLayoutNav() {
               name="(auth)"
               options={{ headerShown: false }}
             />
-          </>
-        ) : (
+          {/* </>
+        ) : ( */}
           <Stack.Screen
             name="(tabs)"
             options={{ headerShown: false }}
           />
-        )}
+        {/* )} */}
       </Stack>
     </ThemeProvider>
-    </Provider>
   );
 }
