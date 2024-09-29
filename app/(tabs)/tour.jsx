@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const book = () => {
+const tour = () => {
   return (
     <View>
       <Text>book</Text>
@@ -9,4 +9,4 @@ const book = () => {
   )
 }
 
-export default book
+export default tour

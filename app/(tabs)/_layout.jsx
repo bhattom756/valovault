@@ -43,9 +43,9 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="book"
+        name="tour"
         options={{
-          title: "BookMark",
+          title: "Tournaments",
           headerShown: false,
         //   tabBarIcon: ({ color, focused }) => (
         //     <TabIcon
@@ -73,9 +73,9 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="lineup"
         options={{
-          title: "Profile",
+          title: "Agent Lineups",
           headerShown: false,
         //   tabBarIcon: ({ color, focused }) => (
         //     <TabIcon
