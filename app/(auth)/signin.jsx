@@ -6,18 +6,25 @@ import { auth } from "../../config/firebase";
 import { Text, Input, ScrollView } from "tamagui";
 import { router } from "expo-router";
 
-const SignIn = () => {
+const signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
     if (email !== "" && password !== "") {
       signInWithEmailAndPassword(auth, email, password)
-      .then(() => console.log("Login success"))
-      .catch((err) => Alert.alert("Login error", err.message));
-        router.replace('/home')
+        .then(() => {
+          console.log("Login success");
+          router.replace('/home');
+        })
+        .catch((err) => {
+          Alert.alert("Login error", err.message);
+        });
+    } else {
+      Alert.alert("Login error", "Please enter both email and password.");
     }
   };
+
   const handlePress = () => {
     router.replace('/signup');
   };
@@ -60,7 +67,6 @@ const SignIn = () => {
               },
             ]}
             onPress={handlePress}
-          
           >
             {({ pressed }) => (
               <Text
@@ -78,4 +84,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default signin;

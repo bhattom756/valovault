@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Pressable, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { createUserWithEmailAndPassword } from "firebase/auth"; // Use createUserWithEmailAndPassword for sign-up
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { Text, Input, ScrollView } from "tamagui";
 import { router } from "expo-router";
@@ -12,9 +12,9 @@ const Signup = () => {
 
   const handleSignUp = () => {
     if (email !== "" && password !== "") {
-      createUserWithEmailAndPassword(auth, email, password) // Correct method for signing up
+      createUserWithEmailAndPassword(auth, email, password) 
         .then(() => {
-          // console.log("Signup success");
+          console.log("Signup success");
           Alert.alert("Signup Success", "Your account has been created!");
           router.replace('/signin')
         })
