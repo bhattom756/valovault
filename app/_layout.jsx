@@ -5,8 +5,6 @@ import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { Provider } from './Provider'; // Tamagui Provider
 import * as NavigationBar from 'expo-navigation-bar';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../config/firebase';
 
 export {
   ErrorBoundary,
@@ -14,7 +12,14 @@ export {
 
 SplashScreen.preventAutoHideAsync();
 
-const AuthenticatedUserContext = createContext(null);
+
+function AppRoot() {
+  return (
+    <Provider>
+        <RootLayoutNav />
+    </Provider>
+  );
+}
 
 export default function RootLayout() {
   const [interLoaded, interError] = useFonts({
@@ -33,42 +38,10 @@ export default function RootLayout() {
   }
 
   return (
-    <Provider>
-      <AuthenticatedUserProvider>
-        <RootLayoutNav />
-      </AuthenticatedUserProvider>
-    </Provider>
+    <AppRoot /> 
   );
 }
-
-const AuthenticatedUserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (authenticatedUser) => {
-      if (authenticatedUser) {
-        console.log("User ID (UID):", authenticatedUser.uid);
-        console.log("User Email:", authenticatedUser.email); 
-        console.log("User Display Name:", authenticatedUser.displayName || "No display name set"); 
-      } else {
-        console.log("No user is logged in.");
-      }
-
-      setUser(authenticatedUser || null); 
-    });
-
-    return () => unsubscribe(); 
-  }, []);
-
-  return (
-    <AuthenticatedUserContext.Provider value={{ user, setUser }}>
-      {children}
-    </AuthenticatedUserContext.Provider>
-  );
-};
-
 function RootLayoutNav() {
-  const { user } = useContext(AuthenticatedUserContext);
   const colorScheme = useColorScheme();
 
   NavigationBar.setPositionAsync('absolute');
@@ -81,21 +54,19 @@ function RootLayoutNav() {
           contentStyle: { backgroundColor: '#161626' },
         }}
       >
-            <Stack.Screen
-              name="index"
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="(auth)"
-              options={{ headerShown: false }}
-            />
+        <Stack.Screen
+          name="index"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="(auth)"
+          options={{ headerShown: false }}
+        />
 
-          <>
-            <Stack.Screen
-              name="(tabs)"
-              options={{ headerShown: false }}
-            />
-          </>
+        <Stack.Screen
+          name="(tabs)"
+          options={{ headerShown: false }}
+        />
       </Stack>
     </ThemeProvider>
   );
